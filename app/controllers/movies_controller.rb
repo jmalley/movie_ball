@@ -5,11 +5,11 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = Movie.search(params[:q]).order("created_at DESC") || Movie.all
 
     url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=godzilla"
     res = JSON.load(RestClient.get(url))
-    @rotten_response = res["links"]
+    @rotten_response = res["movies"].first["synopsis"]
   end
 
   # GET /movies/1
@@ -20,6 +20,7 @@ class MoviesController < ApplicationController
   # GET /movies/new
   def new
     @movie = Movie.new
+    @rotten_url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#{:q}"
   end
 
   # GET /movies/1/edit
@@ -27,9 +28,10 @@ class MoviesController < ApplicationController
   end
 
   def rotten_search
-    input = "lethal weapon"
-
-   puts input
+    @url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#{:q}"
+    res = JSON.load(RestClient.get(@url))
+    @rotten_response = res["movies"].first["synopsis"]
+    return @rotten_response
   end
 
   # POST /movies

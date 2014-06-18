@@ -1,38 +1,44 @@
-<h1>Listing movies</h1>
-
-<table>
+<%- model_class = Movie -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Rotten</th>
-      <th>Critics score</th>
-      <th>Audience score</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:rotten_id) %></th>
+      <th><%= model_class.human_attribute_name(:critics_score) %></th>
+      <th><%= model_class.human_attribute_name(:audience_score) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
+        <td><%= link_to movie.id, movie_path(movie) %></td>
         <td><%= movie.title %></td>
         <td><%= movie.description %></td>
         <td><%= movie.rotten_id %></td>
         <td><%= movie.critics_score %></td>
         <td><%= movie.audience_score %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l movie.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_movie_path(movie), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      movie_path(movie),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Movie', new_movie_path %>
-
-<br />
-
-<p>Rotten Tomatoes response:</p>
-<p><%= @rotten_response %></p>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_movie_path,
+            :class => 'btn btn-primary' %>
