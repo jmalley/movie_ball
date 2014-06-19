@@ -1,0 +1,6 @@
+<% @rotten_response.each do |key, array| %>
+  <p><%= key["title"] %> (<%= key["year"] %>)</p>
+  <p><%= key["synopsis"] %></p>
+  <p><%= key["posters"]["profile"] %></p>
+  <p><%= key %></p>
+<% end %>

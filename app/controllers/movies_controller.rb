@@ -20,7 +20,13 @@ class MoviesController < ApplicationController
   # GET /movies/new
   def new
     @movie = Movie.new
-    @rotten_url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#{:q}"
+
+    #@rotten_results = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#"
+    #RottenTomatoesParser.parse(@rotten_results)
+  end
+
+  def search
+
   end
 
   # GET /movies/1/edit
@@ -31,7 +37,7 @@ class MoviesController < ApplicationController
     @url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#{:q}"
     res = JSON.load(RestClient.get(@url))
     @rotten_response = res["movies"].first["synopsis"]
-    return @rotten_response
+    redirect_to @movie.new
   end
 
   # POST /movies

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :movies, :collection => { :search => :get }
+  
+  get "/rotten_search/results" => 'rotten_search#results', as: :rotten_search
+  resources :rotten_search
+
 
   root "movies#index"
 
