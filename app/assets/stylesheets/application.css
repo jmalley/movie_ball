@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+a.btn-primary:visited, a.btn-danger:visited{
+  color: #FFF;
+}

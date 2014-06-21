@@ -3,5 +3,29 @@
   <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
 
+<% if @rotten_response %>
+<table class="table table-striped">
+<tbody>
+
+  <% @rotten_response.each do |key, array| %>
+    <tr>
+      <td style="width: 100px">
+        <p><%= image_tag(key["posters"]["profile"]) %></p>
+      </td>
+      <td>
+        <p><%= key["title"] %> (<%= key["year"] %>)</p>
+        <p><%= key["synopsis"] %></p>
+      </td>
+      <td style="width: 100px; vertical-align: middle;">
+        <a class="btn btn-primary rotten_select" href="#">Add Movie</a>
+      </td>
+    </tr>
+  <% end %>
+
+</tbody>
+</table>
+
+<% end %>
+
 
 <%= render :partial => 'form' %>

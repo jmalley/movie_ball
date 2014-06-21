@@ -1,6 +1,20 @@
-<% @rotten_response.each do |key, array| %>
-  <p><%= key["title"] %> (<%= key["year"] %>)</p>
-  <p><%= key["synopsis"] %></p>
-  <p><%= key["posters"]["profile"] %></p>
-  <p><%= key %></p>
-<% end %>
+<table class="table table-striped">
+<tbody>
+
+  <% @rotten_response.each do |key, array| %>
+    <tr>
+      <td style="width: 100px">
+        <p><%= image_tag(key["posters"]["profile"]) %></p>
+      </td>
+      <td>
+        <p><%= key["title"] %> (<%= key["year"] %>)</p>
+        <p><%= key["synopsis"] %></p>
+      </td>
+      <td style="width: 100px; vertical-align: middle;">
+        <a class="btn btn-primary rotten_select" href="#">Add Movie</a>
+      </td>
+    </tr>
+  <% end %>
+
+</tbody>
+</table>

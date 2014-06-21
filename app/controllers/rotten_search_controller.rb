@@ -4,7 +4,7 @@ class RottenSearchController < ApplicationController
   end
 
   def results
-    @string = params[:q]
+    @string = params[:qauto]
     url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#{@string}"
     res = JSON.load(RestClient.get(url))
     @rotten_response = res["movies"]

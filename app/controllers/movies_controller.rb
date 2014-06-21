@@ -6,10 +6,6 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     @movies = Movie.search(params[:q]).order("created_at DESC") || Movie.all
-
-    url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=godzilla"
-    res = JSON.load(RestClient.get(url))
-    @rotten_response = res["movies"].first["synopsis"]
   end
 
   # GET /movies/1
@@ -21,11 +17,13 @@ class MoviesController < ApplicationController
   def new
     @movie = Movie.new
 
-    #@rotten_results = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#"
-    #RottenTomatoesParser.parse(@rotten_results)
+    @string = params[:q]
+    url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#{@string}&page_limit=5"
+    res = JSON.load(RestClient.get(url))
+    @rotten_response = res["movies"]
   end
 
-  def search
+  def my_roster
 
   end
 
@@ -88,6 +86,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :description, :rotten_id, :critics_score, :audience_score)
+      params.require(:movie).permit(:title, :description, :rotten_id, :critics_score, :audience_score, :category)
     end
 end

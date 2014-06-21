@@ -1,0 +1,22 @@
+<h1>My Roster</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Movie Title</th>
+      <th>Stats</th>
+      <th>League Rank</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @movie.category %></td>
+      <td><%= model_class.human_attribute_name(:title) %></td>
+      <td><%= @movie.stats %></td>
+      <td><%= @movie.rank %></td>
+      <td><%= @action_buttons %></td>
+    </tr>
+  </tbody>
+</table>

@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140613165000) do
 
   create_table "movies", force: true do |t|
     t.string   "title"
+    t.string   "category"
     t.string   "description"
     t.string   "rotten_id"
     t.string   "critics_score"

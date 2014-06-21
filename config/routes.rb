@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  
+  get "/movies/new" => 'movies#new', as: :rotten_search
+  get "/movies/my_roster" => 'movies#my_roster', as: :my_roster
   resources :movies, :collection => { :search => :get }
   
-  get "/rotten_search/results" => 'rotten_search#results', as: :rotten_search
+  
   resources :rotten_search
 
 
