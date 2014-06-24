@@ -53,6 +53,7 @@
               <li><%= link_to "Link2", "/path2"  %></li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
+            
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -66,13 +67,14 @@
           </div>
           <div class="span3">
             <div class="well sidebar-nav">
-              <h3>Sidebar</h3>
-              <ul class="nav nav-list">
-                <li class="nav-header">Sidebar</li>
-                <li><%= link_to "Link1", "/path1"  %></li>
-                <li><%= link_to "Link2", "/path2"  %></li>
-                <li><%= link_to "Link3", "/path3"  %></li>
-              </ul>
+              <% if user_signed_in? %>
+                Logged in as <strong><%= current_user.email %></strong>.
+                <%= link_to 'Edit profile', edit_user_registration_path %> |
+                <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+              <% else %>
+                <%= link_to "Sign up", new_user_registration_path %> |
+                <%= link_to "Login", new_user_session_path %>
+              <% end %>
             </div><!--/.well -->
           </div><!--/span-->
         </div><!--/row-->

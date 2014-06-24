@@ -1,11 +1,11 @@
 class MoviesController < ApplicationController
-  
+  before_filter :authenticate_user!
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.search(params[:q]).order("created_at DESC") || Movie.all
+      @movies = current_user.movies.search(params[:q]) || current_user.movies
   end
 
   # GET /movies/1
@@ -17,7 +17,7 @@ class MoviesController < ApplicationController
   def new
     @movie = Movie.new
 
-    @string = params[:q]
+    @string = params[:qauto]
     url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#{@string}&page_limit=5"
     res = JSON.load(RestClient.get(url))
     @rotten_response = res["movies"]
@@ -42,7 +42,7 @@ class MoviesController < ApplicationController
   # POST /movies.json
   def create
     @movie = Movie.new(movie_params)
-
+    @movie.user_id = current_user
     respond_to do |format|
       if @movie.save
         format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
@@ -86,6 +86,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :description, :rotten_id, :critics_score, :audience_score, :category)
+      params.require(:movie).permit(:title, :description, :rotten_id, :critics_score, :audience_score, :category, :user_id)
     end
 end

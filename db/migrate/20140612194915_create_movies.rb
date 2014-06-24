@@ -7,6 +7,7 @@ class CreateMovies < ActiveRecord::Migration
       t.string :rotten_id
       t.string :critics_score
       t.string :audience_score
+      t.string :user_id
 
       t.timestamps
     end

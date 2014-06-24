@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  devise_for :users
   get "/movies/new" => 'movies#new', as: :rotten_search
   get "/movies/my_roster" => 'movies#my_roster', as: :my_roster
   resources :movies, :collection => { :search => :get }
