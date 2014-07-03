@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @league.name %>
+</p>
+
+<p>
+  <strong>Game type:</strong>
+  <%= @league.game_type %>
+</p>
+
+<p>
+  <strong>Logo:</strong>
+  <%= @league.logo %>
+</p>
+
+<tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.category %></td>
+        <td><%= link_to movie.id, movie_path(movie) %></td>
+        <td><%= movie.title %></td>
+        <td><%= movie.description %></td>
+        <td><%= movie.rotten_id %></td>
+        <td><%= movie.critics_score %></td>
+        <td><%= movie.audience_score %></td>
+        <td><%=l movie.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_movie_path(movie), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      movie_path(movie),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%# form_for @invite , :url => invites_path do |f| %>
+    <%# f.hidden_field :user_group_id, :value => @invite.user_group_id %>
+    <%# f.label :email %>
+    <%# f.email_field :email %>
+    <%# f.submit 'Send' %>
+<%# end %>
+
+<%= link_to 'Edit', edit_league_path(@league) %> |
+<%= link_to 'Back', leagues_path %>

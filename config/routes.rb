@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
   
+  get 'invites/create'
+
+  resources :leagues
+
+  resources :leagues do
+    resources :movies
+  end
+
+  resources :invites
   devise_for :users
+
   get "/movies/new" => 'movies#new', as: :rotten_search
-  get "/movies/my_roster" => 'movies#my_roster', as: :my_roster
+  #get "/movies/my_roster" => 'movies#my_roster', as: :my_roster
   resources :movies, :collection => { :search => :get }
-  
   
   resources :rotten_search
 
 
-  root "movies#index"
+  root "home#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

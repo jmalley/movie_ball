@@ -16,9 +16,13 @@ class MoviesController < ApplicationController
   # GET /movies/new
   def new
     @movie = Movie.new
+    @movie.user_id = current_user
+    @movie.league_id = params[:league_id]
 
+    @league = params[:league_id]
+    @rotten_api_key = ENV['ROTTEN_TOMATOES_API']
     @string = params[:qauto]
-    url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#{@string}&page_limit=5"
+    url = URI.encode("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=#{@rotten_api_key}&q=#{@string}&page_limit=5")
     res = JSON.load(RestClient.get(url))
     @rotten_response = res["movies"]
   end
@@ -32,10 +36,7 @@ class MoviesController < ApplicationController
   end
 
   def rotten_search
-    @url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=fhtb9hhbjk334mu269aqkas7&q=#{:q}"
-    res = JSON.load(RestClient.get(@url))
-    @rotten_response = res["movies"].first["synopsis"]
-    redirect_to @movie.new
+
   end
 
   # POST /movies
@@ -43,9 +44,13 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     @movie.user_id = current_user
+    @movie.league_id = params[:league_id]
+
+    @league = League.find params[:league_id]
+
     respond_to do |format|
       if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
+        format.html { redirect_to @league, notice: 'Movie was successfully created.' }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new }

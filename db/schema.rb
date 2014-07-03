@@ -11,10 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621024249) do
+ActiveRecord::Schema.define(version: 20140703184239) do
 
   create_table "add_rotten_movie", force: true do |t|
     t.integer "rotten_id"
+  end
+
+  create_table "invites", force: true do |t|
+    t.string   "email"
+    t.integer  "user_group_id"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leagues", force: true do |t|
+    t.string   "name"
+    t.string   "game_type"
+    t.string   "logo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "owner_id"
+  end
+
+  create_table "memberships", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "movies", force: true do |t|
@@ -27,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140621024249) do
     t.string   "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "league_id"
   end
 
   create_table "users", force: true do |t|
