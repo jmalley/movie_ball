@@ -11,6 +11,7 @@ class LeaguesController < ApplicationController
   # GET /leagues/1.json
   def show
     @movies = current_user.movies_for(@league)
+    @users_league = @league.users
   end
 
   # GET /leagues/new
@@ -27,8 +28,13 @@ class LeaguesController < ApplicationController
   def create
     @league = League.new(league_params)
     @league.owner_id = current_user.id
+
     respond_to do |format|
       if @league.save
+        Membership.create!(
+            :user_id => current_user,
+            :league_id => @league.id
+          )
         format.html { redirect_to @league, notice: 'League was successfully created.' }
         format.json { render :show, status: :created, location: @league }
       else

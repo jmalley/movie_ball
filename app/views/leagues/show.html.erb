@@ -14,7 +14,20 @@
   <strong>Logo:</strong>
   <%= @league.logo %>
 </p>
-
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>category</th>
+      <th>id</th>
+      <th>title</th>
+      <th>description</th>
+      <th>rotten_id</th>
+      <th>critics_score</th>
+      <th>audience_score</th>
+      <th>created_at</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
 <tbody>
     <% @movies.each do |movie| %>
       <tr>

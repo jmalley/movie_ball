@@ -1,13 +1,16 @@
 class Membership < ActiveRecord::Base
-  has_and_belongs_to_many :users
+  
+  belongs_to :user
+  belongs_to :league
+  belongs_to :member_title
 
-  #after_create :populate_categories
-  #
-  #def populate_categories
-  #    self.user.movies.create!(:category => 'Category 1')
-  #    self.user.movies.create!(:category => 'Category 2')
-  #    self.user.movies.create!(:category => 'Category 3')
-  #    self.user.movies.create!(:category => 'Category 4')
-  #    self.user.movies.create!(:category => 'Category 5')
-  #end
+  after_create :populate_categories
+  
+  def populate_categories
+      user.league.movies.create!(:category => 'Category 1')
+      user.league.movies.create!(:category => 'Category 2')
+      user.league.movies.create!(:category => 'Category 3')
+      user.league.movies.create!(:category => 'Category 4')
+      user.league.movies.create!(:category => 'Category 5')
+  end
 end
