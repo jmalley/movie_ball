@@ -20,11 +20,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  #def populate_categories
-  #  self.movies.create!(:category => 'Critical Darling')
-  #  self.movies.create!(:category => 'Audience Favorite')
-  #  self.movies.create!(:category => 'crit darl')
-  #  self.movies.create!(:category => 'crit darl')
-  #  self.movies.create!(:category => 'crit darl')
-  #end
+  def populate_categories
+   # league.movies.create!(:category => 'Critical Darling')
+   # self.league.movies.create!(:category => 'Audience Favorite')
+   # self.league.movies.create!(:category => 'crit darl')
+   # self.league.movies.create!(:category => 'crit darl')
+   # self.league.movies.create!(:category => 'crit darl')
+  end
 end

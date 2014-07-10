@@ -3,7 +3,9 @@
 <%# if current_user.league %>
 <ul>
   <% @leagues.each do |league| %>
-    <li><%= link_to league.name, league %> | <%# link_to "Join", member_join(current_user) %></li>
+    <li style="<% if league.owner_id == current_user.id %>background: #999<% end %>"><%= link_to league.name, league %> | <% if is_a_member?(league.id) %> YES! <% end %>
+    
+    </li>
   <% end %>
 </ul>
 <%# end %>

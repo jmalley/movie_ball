@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   get 'invites/create'
 
+  get 'leagues/:id/join' => 'leagues#join', as: :league_join
   resources :leagues
 
   resources :leagues do
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :invites
   devise_for :users
+
+
 
   get "/movies/new" => 'movies#new', as: :rotten_search
   #get "/movies/my_roster" => 'movies#my_roster', as: :my_roster

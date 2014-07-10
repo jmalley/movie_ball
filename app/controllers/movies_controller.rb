@@ -19,6 +19,8 @@ class MoviesController < ApplicationController
     @movie.user_id = current_user
     @movie.league_id = params[:league_id]
 
+    
+
     @league = params[:league_id]
     @rotten_api_key = ENV['ROTTEN_TOMATOES_API']
     @string = params[:qauto]

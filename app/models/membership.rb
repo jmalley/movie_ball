@@ -4,13 +4,17 @@ class Membership < ActiveRecord::Base
   belongs_to :league
   belongs_to :member_title
 
-  after_create :populate_categories
-  
+  #working, but turned off for testing
+  #after_create :populate_categories
+
   def populate_categories
-      user.league.movies.create!(:category => 'Category 1')
-      user.league.movies.create!(:category => 'Category 2')
-      user.league.movies.create!(:category => 'Category 3')
-      user.league.movies.create!(:category => 'Category 4')
-      user.league.movies.create!(:category => 'Category 5')
+    if league.movies.nil?
+      league.movies.create!(:user_id => user.id, :category => 'Category 1')
+      league.movies.create!(:user_id => user.id, :category => 'Category 2')
+      league.movies.create!(:user_id => user.id, :category => 'Category 3')
+      league.movies.create!(:user_id => user.id, :category => 'Category 4')
+      league.movies.create!(:user_id => user.id, :category => 'Category 5')
+    end
   end
+ 
 end

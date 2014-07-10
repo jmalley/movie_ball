@@ -18,6 +18,8 @@
       </td>
       <td style="width: 100px; vertical-align: middle;">
         <a class="btn btn-primary rotten_select" href="#">Add Movie</a>
+        <%# link_to "Add Movie to Table", url: league_movies_url([@league, @movie], :params2 => "hollafromparam2") %>
+        <%# link_to "Add Movie to Table", new_movie_path(:movie => {:title => key["title"], :category => "Link To Creation"}) %>
       </td>
     </tr>
   <% end %>

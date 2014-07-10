@@ -1,5 +1,6 @@
 class LeaguesController < ApplicationController
   before_action :set_league, only: [:show, :edit, :update, :destroy]
+  attr_accessor :league
 
   # GET /leagues
   # GET /leagues.json
@@ -12,6 +13,8 @@ class LeaguesController < ApplicationController
   def show
     @movies = current_user.movies_for(@league)
     @users_league = @league.users
+
+    @holla = params[:params2]
   end
 
   # GET /leagues/new
@@ -23,6 +26,17 @@ class LeaguesController < ApplicationController
   def edit
   end
 
+  def join
+    @league = League.find(params[:l])
+
+    Membership.create!(
+      :user_id => current_user.id,
+      :league_id => params[:l]
+      )
+
+     redirect_to @league, notice: 'You are now a member! Fill up your roster!' 
+  end
+
   # POST /leagues
   # POST /leagues.json
   def create
@@ -32,9 +46,11 @@ class LeaguesController < ApplicationController
     respond_to do |format|
       if @league.save
         Membership.create!(
-            :user_id => current_user,
+            :user_id => current_user.id,
             :league_id => @league.id
           )
+        current_user.populate_categories()
+        # movies.populate_categories
         format.html { redirect_to @league, notice: 'League was successfully created.' }
         format.json { render :show, status: :created, location: @league }
       else
