@@ -28,13 +28,15 @@ class LeaguesController < ApplicationController
 
   def join
     @league = League.find(params[:l])
-
-    Membership.create!(
-      :user_id => current_user.id,
-      :league_id => params[:l]
-      )
-
+    if is_a_member?(@league.id)
+      redirect_to @league, notice: 'You are already a member you silly goose!'
+    else
+      Membership.create!(
+        :user_id => current_user.id,
+        :league_id => params[:l]
+        )
      redirect_to @league, notice: 'You are now a member! Fill up your roster!' 
+    end
   end
 
   # POST /leagues
