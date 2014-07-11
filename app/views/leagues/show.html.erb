@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
-<h3><%= link_to "Join League", league_join_path(@league, :l => @league.id) %></h3>
+<h3>
+  <% unless is_a_member?(@league.id) %>
+    <%= link_to "Join League", league_join_path(@league, :l => @league.id) %>
+  <% end %>
+</h3>
 <p>
   <strong>Name:</strong>
   <%= @league.name %>
