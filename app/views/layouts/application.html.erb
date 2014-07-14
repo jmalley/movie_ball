@@ -49,11 +49,13 @@
           <a class="brand" href="/">MovieBall</a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <li><%= link_to "About", "#"  %></li>
+              <% if current_user %>
+                <li><%= link_to "Create a League", new_league_path %></li>
+              <% else %>
+                <li><%= link_to "Sign Up", "/users/sign_up"  %></li>
+              <% end %>
             </ul>
-            
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -83,7 +85,7 @@
         </div><!--/row-->
 
       <footer>
-        <p>&copy; James Malley 2014</p>
+        <p>&copy; JM 2014</p>
       </footer>
 
     </div> <!-- /container -->

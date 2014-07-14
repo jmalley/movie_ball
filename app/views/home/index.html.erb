@@ -1,11 +1,20 @@
-<h2>Welcome!</h2>
+<% unless current_user %>
+  <h2>Welcome to MovieBall!</h2>
+  <p>Think you have what it takes to be the best producer? Sign up to begin!</p>
+<% end %>
 
-<%# if current_user.league %>
-<ul>
-  <% @leagues.each do |league| %>
-    <li style="<% if league.owner_id == current_user.id %>background: #999<% end %>"><%= link_to league.name, league %> | <% if is_a_member?(league.id) %> YES! <% end %>
-    
-    </li>
+<% if current_user %>
+  <h3>Welcome back!</h3>
+  <p>Your leagues:</p>
+  <% if has_memberships? %>
+    <ul>
+      <% @leagues.each do |league| %>
+        <li><%= link_to league.name, league %> | <% if league.owner_id == current_user.id %> <b>Owner</b> <% elsif is_a_member?(league.id) %> Member <% end %>
+        
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You are not a member of any leagues. <%= link_to "Create your own", new_league_path %>.</p>
   <% end %>
-</ul>
-<%# end %>
+<% end %>

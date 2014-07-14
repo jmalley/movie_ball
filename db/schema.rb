@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708003700) do
+ActiveRecord::Schema.define(version: 20140703184239) do
 
   create_table "add_rotten_movie", force: true do |t|
     t.integer "rotten_id"
@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(version: 20140708003700) do
   end
 
   create_table "memberships", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "league_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "movies", force: true do |t|

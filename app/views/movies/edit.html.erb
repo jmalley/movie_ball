@@ -1,6 +1,6 @@
 <%- model_class = Movie -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+  <h1>Search results for <%= @string %></h1>
 </div>
 
 
@@ -19,10 +19,11 @@
         <p><%= key["id"] %> </p>
       </td>
       <td style="width: 100px; vertical-align: middle;">
-        <a class="btn btn-primary rotten_select" href="#">Add Movie</a>
-        <%= link_to "Add Movie", update_movie_with_rt_path(:movie => {:rotten_id => key["id"], :title => key["title"]}), :method => :patch %>
-        <%# link_to "Add Movie to Table", url: league_movies_url([@league, @movie], :params2 => "hollafromparam2") %>
-        <%# link_to "Add Movie to Table", new_movie_path(:movie => {:title => key["title"], :category => "Link To Creation"}) %>
+      <% unless movie_taken?(key["id"], @league) %>
+        <%= link_to "Add Movie", update_movie_with_rt_path(:movie => {:rotten_id => key["id"], :title => key["title"]}), :method => :patch, :class => "btn btn-primary rotten_select" %>
+      <% else %>
+        Someone in your league already has this movie.
+      <% end %>
       </td>
     </tr>
   <% end %>
@@ -32,4 +33,4 @@
 
 <% end %>
 
-<%= render :partial => 'form' %>
+<%# render :partial => 'form' %>

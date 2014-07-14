@@ -75,7 +75,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.update(movie_params)
-        format.html { redirect_to @league, notice: 'Movie was successfully updated.' }
+        format.html { redirect_to @league, notice: 'Your roster was successfully updated.' }
         format.json { render :show, status: :ok, location: @movie }
       else
         format.html { render :edit }

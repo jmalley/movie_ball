@@ -9,12 +9,10 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Position</th>
+      <th>Category</th>
       <th>title</th>
-      <th>description</th>
-      <th>rotten_id</th>
-      <th>critics_score</th>
-      <th>audience_score</th>
+      <th>Critics Score</th>
+      <th>Audience Score</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -23,13 +21,15 @@
       <tr>
         <td><%= movie.category %></td>
         <td><%= movie.title %></td>
-        <td><%= movie.description %></td>
-        <td><%= movie.rotten_id %></td>
         <td><%= movie.critics_score %></td>
         <td><%= movie.audience_score %></td>
         <td>
+        <% unless movie.rotten_id %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       rotten_search_index_path(:category => "#{movie.category}", :id => movie.id, :league_id => @league.id), :class => 'btn btn-mini' %>
+        <% else %>
+          Stub
+        <% end %>
           <%# link_to t('.destroy', :default => t("helpers.links.destroy")),
                       movie_path(movie),
                       :method => :delete,

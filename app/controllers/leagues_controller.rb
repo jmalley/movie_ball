@@ -51,7 +51,7 @@ class LeaguesController < ApplicationController
             :user_id => current_user.id,
             :league_id => @league.id
           )
-        current_user.populate_categories()
+        #current_user.populate_categories()
         # movies.populate_categories
         format.html { redirect_to @league, notice: 'League was successfully created.' }
         format.json { render :show, status: :created, location: @league }
