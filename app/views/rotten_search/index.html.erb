@@ -1,5 +1,5 @@
 <p>Search Rotten Tomatoes for a movie to use in "<%= @category %>"</p>
-<%= form_tag rotten_search_path(:id => @movie_id), method: "GET" do %>
+<%= form_tag rotten_search_path(:id => @movie_id, :league_id => @league_id), method: "GET" do %>
   <%= hidden_field(:rotten_search, :category, :value => @category_url_safe) %>
   <%= text_field_tag :qauto, params[:qauto] %>
   <%= submit_tag "Search", :name => nil %>

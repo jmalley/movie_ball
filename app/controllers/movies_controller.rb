@@ -28,10 +28,12 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/edit
   def edit
+    @movie_id = Movie.find(params[:id])
+
     @movie.user_id = current_user
     @movie.league_id = params[:league_id]
     @league = params[:league_id]
-    
+
     @rotten_api_key = ENV['ROTTEN_TOMATOES_API']
     @string = params[:qauto]
     url = URI.encode("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=#{@rotten_api_key}&q=#{@string}&page_limit=5")
@@ -46,12 +48,7 @@ class MoviesController < ApplicationController
   # POST /movies
   # POST /movies.json
   def create
-    @movie = Movie.new(movie_params)
-    @movie.user_id = current_user
-    @movie.league_id = params[:league_id]
-
-    @league = League.find params[:league_id]
-
+    # Movies have to be added to existing categories via movies#edit
     respond_to do |format|
       if @movie.save
         format.html { redirect_to @league, notice: 'Movie was successfully created.' }
@@ -66,9 +63,19 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update
+    @movie = Movie.find(params[:id])
+
+    # Possible the below are not needed since they are already created
+    #@movie.user_id = current_user
+    #@movie.league_id = params[:league_id]
+    @movie.rotten_id = params[:rotten_id]
+    @movie.title = params[:title]
+
+    @league = League.find params[:league_id]
+
     respond_to do |format|
       if @movie.update(movie_params)
-        format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
+        format.html { redirect_to @league, notice: 'Movie was successfully updated.' }
         format.json { render :show, status: :ok, location: @movie }
       else
         format.html { render :edit }
@@ -90,11 +97,11 @@ class MoviesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie = Movie.find(params[:id])
+      @movie = Movie.find(params[:movie_id] || params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :description, :rotten_id, :critics_score, :audience_score, :category, :user_id)
+      params.require(:movie).permit(:title, :description, :rotten_id, :critics_score, :audience_score, :category, :user_id) #if params[:movie]
     end
 end

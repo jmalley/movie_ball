@@ -5,6 +5,7 @@ class RottenSearchController < ApplicationController
     @category = params[:category]
     @category_url_safe = params[:category].encode!
     @movie_id = params[:id]
+    @league_id = params[:league_id]
   end
 
   def results

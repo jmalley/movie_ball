@@ -29,7 +29,7 @@
         <td><%= movie.audience_score %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      rotten_search_index_path(:category => "#{movie.category}", :id => movie.id), :class => 'btn btn-mini' %>
+                      rotten_search_index_path(:category => "#{movie.category}", :id => movie.id, :league_id => @league.id), :class => 'btn btn-mini' %>
           <%# link_to t('.destroy', :default => t("helpers.links.destroy")),
                       movie_path(movie),
                       :method => :delete,

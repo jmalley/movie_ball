@@ -8,11 +8,8 @@ class User < ActiveRecord::Base
     movies.where(league_id: league.id)
   end
 
-  #has_many :leagues_as_owner, :class_name => "League"
   #has_many :invitations, :class_name => "Invite", :foreign_key => 'recipient_id'
   #has_many :sent_invites, :class_name => "Invite", :foreign_key => 'sender_id'
-
-  #has_one :owned_league, class_name: "League", foreign_key: "owner_id"
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -20,11 +17,4 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def populate_categories
-   # league.movies.create!(:category => 'Critical Darling')
-   # self.league.movies.create!(:category => 'Audience Favorite')
-   # self.league.movies.create!(:category => 'crit darl')
-   # self.league.movies.create!(:category => 'crit darl')
-   # self.league.movies.create!(:category => 'crit darl')
-  end
 end
