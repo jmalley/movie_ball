@@ -53,7 +53,7 @@
 
 <% content_for :sidebar do %>
   <!-- sidebar content specific to this page -->
-  <% image_tag @league.logo %>
+  <%= image_tag @league.logo.url(:medium) %>
 
   <p>
     <strong>Game type:</strong>
