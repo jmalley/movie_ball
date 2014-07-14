@@ -14,6 +14,7 @@ class LeaguesController < ApplicationController
     @movies = current_user.movies_for(@league)
 
     @memberships = @league.memberships.map{ |membership| membership.user }
+    @member_movies = @memberships.map{ |m| m.movies_for(@league)}
     #@member_users = User.where("id = #{@memberships.user_id}")
 
   end

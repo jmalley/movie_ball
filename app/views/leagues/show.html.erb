@@ -25,7 +25,7 @@
         <td><%= movie.audience_score %></td>
         <td>
         <% unless movie.rotten_id %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          <%= link_to "Add Movie",
                       rotten_search_index_path(:category => "#{movie.category}", :id => movie.id, :league_id => @league.id), :class => 'btn btn-mini' %>
         <% else %>
           Stub
@@ -65,7 +65,15 @@
   <p>
   <ul>
     <% @memberships.each do |user| %>
-      <li><%= user.email %></li>
+      <li>
+        <%= user.email %><br />
+          <% user.movies.where("movies.title IS NOT NULL AND league_id = #{@league.id}").each do |m| %>
+
+              <%= m.title %><br />
+
+          <% end %>
+      </li>
+
     <% end %>
   </ul>
 <% end %>
