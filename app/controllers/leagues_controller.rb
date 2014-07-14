@@ -1,4 +1,5 @@
 class LeaguesController < ApplicationController
+
   before_action :set_league, only: [:show, :edit, :update, :destroy]
   attr_accessor :league
 

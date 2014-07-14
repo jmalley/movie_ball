@@ -32,6 +32,7 @@ gem 'will_paginate'
 
 #file uploads
 gem "paperclip", "~> 4.1"
+gem 'aws-sdk', '~> 1.5.7'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

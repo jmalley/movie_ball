@@ -5,8 +5,9 @@
 
 <% if current_user %>
   <h3>Welcome back!</h3>
-  <p>Your leagues:</p>
+  
   <% if has_memberships? %>
+  <p>Your leagues:</p>
     <ul>
       <% @leagues.each do |league| %>
         <li><%= link_to league.name, league %> | <% if league.owner_id == current_user.id %> <b>Owner</b> <% elsif is_a_member?(league.id) %> Member <% end %>

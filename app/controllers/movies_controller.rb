@@ -30,7 +30,7 @@ class MoviesController < ApplicationController
   def edit
     @movie_id = Movie.find(params[:id])
 
-    @movie.user_id = current_user
+    @movie.user_id = current_user@
     @movie.league_id = params[:league_id]
     @league = params[:league_id]
 

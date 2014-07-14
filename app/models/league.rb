@@ -9,7 +9,15 @@ class League < ActiveRecord::Base
   belongs_to :owner, :class_name => "User", :foreign_key => :owner_id
   has_many :invites
 
-  has_attached_file :logo, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :logo, 
+                    :styles => { :medium => "300x300>", :thumb => "100x100>" },
+                    :default_url => "/images/:style/missing.png", 
+                    :storage => :s3,
+                    :s3_credentials => {
+                    :bucket => ENV['BUCKET'],
+                    :access_key_id => ENV['S3_ACCESS_KEY'],
+                    :secret_access_key => ENV['S3_SECRET_KEY']
+                  }
   validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/
 
 end

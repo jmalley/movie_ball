@@ -1,10 +1,4 @@
-<p id="notice"><%= notice %></p>
-<h3>
-  <% unless is_a_member?(@league.id) %>
-    <%= link_to "Join League", league_join_path(@league, :l => @league.id) %>
-  <% end %>
-</h3>
-
+<% if is_a_member?(@league.id) %>
 <h3>Your Roster in <%= @league.name %></h3>
 <table class="table table-striped">
   <thead>
@@ -48,17 +42,23 @@
     <%# f.submit 'Send' %>
 <%# end %>
 
-<%= link_to 'Edit', edit_league_path(@league) %> |
-<%= link_to 'Back', leagues_path %>
+<% else %>
+  <p>You are not a member of <strong><%= @league.name %></strong>. <%= link_to "Join Up!", league_join_path(@league, :l => @league.id) %></p>
+<% end #end is_a_member? %>
 
 <% content_for :sidebar do %>
   <!-- sidebar content specific to this page -->
   <%= image_tag @league.logo.url(:medium) %>
 
-  <p>
-    <strong>Game type:</strong>
-    <%= @league.game_type %>
-  </p>
+  <% if is_owner?(@league.id) %>
+    <p>
+      <strong><%= link_to 'Edit League', edit_league_path(@league) %></strong>
+    </p>
+  <% elsif is_a_member?(@league.id) %>
+    <%# link_to "Leave League", league_leave_path(@league, :l => @league.id), :confirm => "Are you sure you want to leave #{@league.name}" %>
+  <% else %>
+    <h4><%= link_to "Join League", league_join_path(@league, :l => @league.id) %></h4>
+  <% end %>
 
   <p>
     <strong>Members</strong>
@@ -67,11 +67,11 @@
     <% @memberships.each do |user| %>
       <li>
         <%= user.email %><br />
+          <div style="display: none">
           <% user.movies.where("movies.title IS NOT NULL AND league_id = #{@league.id}").each do |m| %>
-
               <%= m.title %><br />
-
           <% end %>
+          </div>
       </li>
 
     <% end %>

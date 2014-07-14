@@ -56,7 +56,10 @@
                 <li><%= link_to "Sign Up", "/users/sign_up"  %></li>
               <% end %>
             </ul>
+
+            <span style="float: right; clear: all; padding-top: 10px" id="notice"><%= bootstrap_flash %><%= notice %></span>
           </div><!--/.nav-collapse -->
+
         </div>
       </div>
     </div>
@@ -64,7 +67,6 @@
     <div class="container">
         <div class="row">
           <div class="span9">
-            <%= bootstrap_flash %>
             <%= yield %>
           </div>
           <div class="span3">

@@ -4,6 +4,10 @@ module ApplicationHelper
     @member = !Membership.where("user_id = #{current_user.id} AND league_id = #{league_id}").empty?
   end
 
+  def is_owner?(league_id)
+    @owner = !League.where("owner_id = #{current_user.id} AND id = #{league_id}").empty?
+  end
+
   def movie_taken?(rotten_id_i, league_id)
     @movie = !Movie.where("rotten_id = #{rotten_id_i} AND league_id = #{league_id}").empty?
   end
@@ -11,5 +15,6 @@ module ApplicationHelper
   def has_memberships?
     @member = !Membership.where("user_id = #{current_user.id}").empty?
   end
+
 
 end
