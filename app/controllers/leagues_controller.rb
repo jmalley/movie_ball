@@ -12,9 +12,10 @@ class LeaguesController < ApplicationController
   # GET /leagues/1.json
   def show
     @movies = current_user.movies_for(@league)
-    @users_league = @league.users
 
-    @holla = params[:params2]
+    @memberships = @league.memberships.map{ |membership| membership.user }
+    #@member_users = User.where("id = #{@memberships.user_id}")
+
   end
 
   # GET /leagues/new

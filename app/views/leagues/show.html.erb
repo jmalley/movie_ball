@@ -59,4 +59,13 @@
     <strong>Game type:</strong>
     <%= @league.game_type %>
   </p>
+
+  <p>
+    <strong>Members</strong>
+  <p>
+  <ul>
+    <% @memberships.each do |user| %>
+      <li><%= user.email %></li>
+    <% end %>
+  </ul>
 <% end %>
