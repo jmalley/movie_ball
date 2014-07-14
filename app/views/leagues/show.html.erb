@@ -4,31 +4,17 @@
     <%= link_to "Join League", league_join_path(@league, :l => @league.id) %>
   <% end %>
 </h3>
-<p>
-  <strong>Name:</strong>
-  <%= @league.name %>
-</p>
 
-<p>
-  <strong>Game type:</strong>
-  <%= @league.game_type %>
-</p>
-
-<p>
-  <strong>Logo:</strong>
-  <%= @league.logo %>
-</p>
+<h3>Your Roster in <%= @league.name %></h3>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>category</th>
-      <th>id</th>
+      <th>Position</th>
       <th>title</th>
       <th>description</th>
       <th>rotten_id</th>
       <th>critics_score</th>
       <th>audience_score</th>
-      <th>created_at</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -36,17 +22,15 @@
     <% @movies.each do |movie| %>
       <tr>
         <td><%= movie.category %></td>
-        <td><%= link_to movie.id, movie_path(movie) %></td>
         <td><%= movie.title %></td>
         <td><%= movie.description %></td>
         <td><%= movie.rotten_id %></td>
         <td><%= movie.critics_score %></td>
         <td><%= movie.audience_score %></td>
-        <td><%=l movie.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_movie_path(movie), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      rotten_search_index_path(:category => "#{movie.category}", :id => movie.id), :class => 'btn btn-mini' %>
+          <%# link_to t('.destroy', :default => t("helpers.links.destroy")),
                       movie_path(movie),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
@@ -66,3 +50,13 @@
 
 <%= link_to 'Edit', edit_league_path(@league) %> |
 <%= link_to 'Back', leagues_path %>
+
+<% content_for :sidebar do %>
+  <!-- sidebar content specific to this page -->
+  <% image_tag @league.logo %>
+
+  <p>
+    <strong>Game type:</strong>
+    <%= @league.game_type %>
+  </p>
+<% end %>

@@ -2,4 +2,32 @@
 <div class="page-header">
   <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
+
+
+<% if @rotten_response %>
+<table class="table table-striped">
+<tbody>
+
+  <% @rotten_response.each do |key, array| %>
+    <tr>
+      <td style="width: 100px">
+        <p><%= image_tag(key["posters"]["profile"]) %></p>
+      </td>
+      <td>
+        <p><%= key["title"] %> (<%= key["year"] %>)</p>
+        <p><%= key["synopsis"] %></p>
+      </td>
+      <td style="width: 100px; vertical-align: middle;">
+        <a class="btn btn-primary rotten_select" href="#">Add Movie</a>
+        <%# link_to "Add Movie to Table", url: league_movies_url([@league, @movie], :params2 => "hollafromparam2") %>
+        <%# link_to "Add Movie to Table", new_movie_path(:movie => {:title => key["title"], :category => "Link To Creation"}) %>
+      </td>
+    </tr>
+  <% end %>
+
+</tbody>
+</table>
+
+<% end %>
+
 <%= render :partial => 'form' %>

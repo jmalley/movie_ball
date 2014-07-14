@@ -1,6 +1,10 @@
 class RottenSearchController < ApplicationController
+  include ERB::Util
 
   def index
+    @category = params[:category]
+    @category_url_safe = params[:category].encode!
+    @movie_id = params[:id]
   end
 
   def results

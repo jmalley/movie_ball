@@ -19,14 +19,7 @@ class MoviesController < ApplicationController
     @movie.user_id = current_user
     @movie.league_id = params[:league_id]
 
-    
 
-    @league = params[:league_id]
-    @rotten_api_key = ENV['ROTTEN_TOMATOES_API']
-    @string = params[:qauto]
-    url = URI.encode("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=#{@rotten_api_key}&q=#{@string}&page_limit=5")
-    res = JSON.load(RestClient.get(url))
-    @rotten_response = res["movies"]
   end
 
   def my_roster
@@ -35,6 +28,15 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/edit
   def edit
+    @movie.user_id = current_user
+    @movie.league_id = params[:league_id]
+    @league = params[:league_id]
+    
+    @rotten_api_key = ENV['ROTTEN_TOMATOES_API']
+    @string = params[:qauto]
+    url = URI.encode("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=#{@rotten_api_key}&q=#{@string}&page_limit=5")
+    res = JSON.load(RestClient.get(url))
+    @rotten_response = res["movies"]
   end
 
   def rotten_search
