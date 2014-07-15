@@ -127,6 +127,8 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
     pusher-client (0.6.0)
       json
       websocket (~> 1.0)
@@ -239,6 +241,7 @@ DEPENDENCIES
   less-rails
   paperclip (~> 4.1)
   pg
+  pry-rails
   rails (= 4.1.1)
   rails_12factor
   rest-client

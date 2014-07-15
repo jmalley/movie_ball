@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Category</th>
-      <th>title</th>
+      <th>Title</th>
       <th>Critics Score</th>
       <th>Audience Score</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -53,7 +53,18 @@
   <% if is_owner?(@league.id) %>
     <p>
       <strong><%= link_to 'Edit League', edit_league_path(@league) %></strong>
+    </p> 
+    <p>
+
+      <%= form_for @invite, :url => invites_path do |f| %>
+          <%= hidden_field_tag :league_id, @league.id %>
+          <%= f.label :email %>
+          <%= f.email_field :email %>
+          <%= f.submit 'Send' %>
+      <% end %>
+
     </p>
+
   <% elsif is_a_member?(@league.id) %>
     <%# link_to "Leave League", league_leave_path(@league, :l => @league.id), :confirm => "Are you sure you want to leave #{@league.name}" %>
   <% else %>
@@ -66,7 +77,13 @@
   <ul>
     <% @memberships.each do |user| %>
       <li>
-        <%= user.email %><br />
+      <% if current_user.email == user.email %>
+        You
+      <% else %>
+        <%= user.email %>
+      <% end %>
+
+        <br />
           <div style="display: none">
           <% user.movies.where("movies.title IS NOT NULL AND league_id = #{@league.id}").each do |m| %>
               <%= m.title %><br />
@@ -76,4 +93,17 @@
 
     <% end %>
   </ul>
-<% end %>
+  <p>
+    <strong>Invited</strong>
+  <p>
+  <ul>
+    <% @invited.each do |i| %>
+    <%# Need to find way of collapsing this nested do loop %>
+      <li>
+        <% i.each do |user| %>
+          <%= user.email %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <% end # end sidebar%>

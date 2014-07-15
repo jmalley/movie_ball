@@ -12,8 +12,11 @@ class LeaguesController < ApplicationController
   # GET /leagues/1
   # GET /leagues/1.json
   def show
+    @league = League.find(params[:id])
     @movies = current_user.movies_for(@league)
-
+    @invite = Invite.new
+    @invited = @league.invites.map{ |u| User.where("id = #{u.recipient_id}")}
+    binding.pry
     @memberships = @league.memberships.map{ |membership| membership.user }
     @member_movies = @memberships.map{ |m| m.movies_for(@league)}
     #@member_users = User.where("id = #{@memberships.user_id}")

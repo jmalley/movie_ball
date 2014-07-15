@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140714204712) do
 
   create_table "invites", force: true do |t|
     t.string   "email"
-    t.integer  "user_group_id"
+    t.integer  "league_id"
     t.integer  "sender_id"
     t.integer  "recipient_id"
     t.string   "token"
