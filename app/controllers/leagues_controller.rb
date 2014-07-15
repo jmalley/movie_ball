@@ -6,7 +6,7 @@ class LeaguesController < ApplicationController
   # GET /leagues
   # GET /leagues.json
   def index
-    @leagues = League.all
+    @leagues = current_user.leagues
   end
 
   # GET /leagues/1
@@ -15,8 +15,9 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
     @movies = current_user.movies_for(@league)
     @invite = Invite.new
-    @invited = @league.invites.map{ |u| User.where("id = #{u.recipient_id}")}
-    binding.pry
+
+    # @invited = @league.invites.map{ |u| User.where("id = #{u.recipient_id}")}
+    @invited = @league.invited_users.where("accepted is null")
     @memberships = @league.memberships.map{ |membership| membership.user }
     @member_movies = @memberships.map{ |m| m.movies_for(@league)}
     #@member_users = User.where("id = #{@memberships.user_id}")
@@ -41,7 +42,8 @@ class LeaguesController < ApplicationController
         :user_id => current_user.id,
         :league_id => params[:l]
         )
-     redirect_to @league, notice: 'You are now a member! Fill up your roster!' 
+      Invite.accept_invite(@league.id, current_user.id)
+      redirect_to @league, notice: 'You are now a member! Fill up your roster!' 
     end
   end
 

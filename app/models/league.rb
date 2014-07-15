@@ -8,6 +8,7 @@ class League < ActiveRecord::Base
 
   belongs_to :owner, :class_name => "User", :foreign_key => :owner_id
   has_many :invites
+  has_many :invited_users, :through => :invites, :source => :recipient
 
   has_attached_file :logo, 
                     :styles => { :medium => "300x300>", :thumb => "100x100>" },

@@ -19,3 +19,11 @@
     <p>You are not a member of any leagues. <%= link_to "Create your own", new_league_path %>.</p>
   <% end %>
 <% end %>
+
+<% content_for :sidebar do %>
+<% if current_user %>
+  <% @pending_invites.each do |invite| %>
+    <%= invite.league_id %>
+  <% end %>
+<% end %>
+<% end #end sidebar content%>

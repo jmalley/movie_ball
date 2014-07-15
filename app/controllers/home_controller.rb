@@ -1,8 +1,13 @@
 class HomeController < ApplicationController
   def index
-    @leagues = League.all
-
-    
+    if current_user
+      @leagues = current_user.leagues
+      @pending_invites = Invite.list_user_invites(current_user.id)
+      
+      #@league_invites = @pending_invites.leagues
+    else
+      @leagues = []
+    end
   end
 
   def member_join(current_user)

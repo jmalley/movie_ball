@@ -43,7 +43,9 @@
 <%# end %>
 
 <% else %>
-  <p>You are not a member of <strong><%= @league.name %></strong>. <%= link_to "Join Up!", league_join_path(@league, :l => @league.id) %></p>
+  <% if is_invited?(@league.id) %>
+  <p>You've been invited to <strong><%= @league.name %></strong>. <%= link_to "Join Up!", league_join_path(@league, :l => @league.id) %></p>
+  <% end %>
 <% end #end is_a_member? %>
 
 <% content_for :sidebar do %>
@@ -51,24 +53,27 @@
   <%= image_tag @league.logo.url(:medium) %>
 
   <% if is_owner?(@league.id) %>
+  <br /><br />
     <p>
-      <strong><%= link_to 'Edit League', edit_league_path(@league) %></strong>
+      <strong><%=h link_to 'Edit League &#8594;'.html_safe, edit_league_path(@league) %></strong>
     </p> 
-    <p>
 
       <%= form_for @invite, :url => invites_path do |f| %>
           <%= hidden_field_tag :league_id, @league.id %>
-          <%= f.label :email %>
+          <%= f.label :email, "Invite Member (email)" %>
           <%= f.email_field :email %>
           <%= f.submit 'Send' %>
       <% end %>
 
-    </p>
+   
 
   <% elsif is_a_member?(@league.id) %>
     <%# link_to "Leave League", league_leave_path(@league, :l => @league.id), :confirm => "Are you sure you want to leave #{@league.name}" %>
   <% else %>
-    <h4><%= link_to "Join League", league_join_path(@league, :l => @league.id) %></h4>
+    <% if is_invited?(@league.id) %>
+    <% is_invited?(@league.id) %>
+      <h4><%= link_to "Join League", league_join_path(@league, :l => @league.id) %></h4>
+    <% end %>
   <% end %>
 
   <p>
@@ -100,9 +105,7 @@
     <% @invited.each do |i| %>
     <%# Need to find way of collapsing this nested do loop %>
       <li>
-        <% i.each do |user| %>
-          <%= user.email %>
-        <% end %>
+        <%= i.email %>
       </li>
     <% end %>
   </ul>

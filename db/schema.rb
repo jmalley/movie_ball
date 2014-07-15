@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714204712) do
+ActiveRecord::Schema.define(version: 20140715195808) do
 
   create_table "add_rotten_movie", force: true do |t|
     t.integer "rotten_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140714204712) do
     t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "accepted"
   end
 
   create_table "leagues", force: true do |t|
@@ -46,6 +47,9 @@ ActiveRecord::Schema.define(version: 20140714204712) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "memberships", ["league_id", "user_id"], name: "index_memberships_on_league_id_and_user_id", unique: true
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
 
   create_table "movies", force: true do |t|
     t.string   "title"
