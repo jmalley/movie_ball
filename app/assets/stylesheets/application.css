@@ -14,6 +14,36 @@
  *= require_self
  */
 
+h1,h2,h3,h4{
+  font-family: 'Open Sans', sans-serif;
+}
+
 a.btn-primary:visited, a.btn-danger:visited{
   color: #FFF;
+}
+
+body{
+  background: #333;
+}
+
+#mainContainer{
+  background: #FFF;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.navbar-fixed-top div{
+  background: #3b8dbd;
+  color: #FFF;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.navbar-fixed-top div a, .navbar-fixed-top div a:visited{
+  color: #FFF !important;
+  text-shadow: none !important;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.navbar-fixed-top div a:hover{
+  color: #999;
 }

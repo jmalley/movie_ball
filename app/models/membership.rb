@@ -4,7 +4,6 @@ class Membership < ActiveRecord::Base
   belongs_to :league
   belongs_to :member_title
 
-  #turn off for testing
   after_create :populate_categories
 
   def populate_categories
@@ -15,7 +14,7 @@ class Membership < ActiveRecord::Base
       league.movies.create!(:user_id => user.id, :category => 'Doc/Foreign/Animation')
       league.movies.create!(:user_id => user.id, :category => 'Early Release')
     else
-      
+      # todo: check selected movie status
     end
   end
 
