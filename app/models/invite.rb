@@ -1,4 +1,5 @@
 class Invite < ActiveRecord::Base
+  # Don't allow through any duplicate recipients for the same league
   validates :recipient_id, uniqueness: { scope: :league_id, message: "Already a member." }
 
   belongs_to :league

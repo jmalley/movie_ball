@@ -21,9 +21,10 @@
 <% end %>
 
 <% content_for :sidebar do %>
-<% if current_user %>
-  <% @pending_invites.each do |invite| %>
-    <%= invite.league_id %>
+<% if current_user && @pending_invites %>
+  <p>Pending League Invites</p>
+  <% @league_invites.each do |l| %>
+    <%= link_to l.name, l %>
   <% end %>
 <% end %>
 <% end #end sidebar content%>
