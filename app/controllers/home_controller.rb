@@ -2,8 +2,7 @@ class HomeController < ApplicationController
   def index
     if current_user
       @leagues = current_user.leagues
-      @pending_invites = current_user.invitations.map{ |l| l.league_id }
-      @league_invites = League.where("id = #{@pending_invites.first}")
+      @pending_invites = current_user.invitations.not_accepted.map{ |l| League.where("id = #{l.league_id}").first }
       # binding.pry
     else
       @leagues = []

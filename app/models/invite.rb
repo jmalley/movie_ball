@@ -28,4 +28,8 @@ class Invite < ActiveRecord::Base
     invite.update_attributes(accepted: Time.now)
   end
 
+  def self.not_accepted
+    invite = where("accepted is null")
+  end
+
 end

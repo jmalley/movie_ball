@@ -21,10 +21,10 @@
 <% end %>
 
 <% content_for :sidebar do %>
-<% if current_user && @pending_invites %>
+<% if current_user && !@pending_invites.empty? %>
   <p>Pending League Invites</p>
-  <% @league_invites.each do |l| %>
-    <%= link_to l.name, l %>
+  <% @pending_invites.each do |l| %>
+    <%= link_to l.name, l %><br />
   <% end %>
 <% end %>
 <% end #end sidebar content%>
