@@ -98,15 +98,17 @@
 
     <% end %>
   </ul>
-  <p>
-    <strong>Invited</strong>
-  <p>
-  <ul>
-    <% @invited.each do |i| %>
-    <%# Need to find way of collapsing this nested do loop %>
-      <li>
-        <%= i.email %>
-      </li>
-    <% end %>
-  </ul>
+  <% if @invited %>
+    <p>
+      <strong>Invited</strong>
+    <p>
+    <ul>
+      <% @invited.each do |i| %>
+      <%# Need to find way of collapsing this nested do loop %>
+        <li>
+          <%= i.email %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
   <% end # end sidebar%>
