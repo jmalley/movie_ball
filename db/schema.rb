@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140715195808) do
+ActiveRecord::Schema.define(version: 20140717131613) do
 
   create_table "add_rotten_movie", force: true do |t|
     t.integer "rotten_id"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20140715195808) do
     t.string   "title"
     t.string   "category"
     t.string   "description"
-    t.string   "rotten_id"
+    t.integer  "rotten_id",      limit: 255
     t.string   "critics_score"
     t.string   "audience_score"
     t.string   "user_id"

@@ -19,7 +19,7 @@
         <p><%= key["id"] %> </p>
       </td>
       <td style="width: 100px; vertical-align: middle;">
-      <% unless movie_taken?(key["id"].to_i, @league) %>
+      <% unless movie_taken?(key["id"], @league) %>
         <%= link_to "Add Movie", update_movie_with_rt_path(:movie => {:rotten_id => key["id"], :title => key["title"]}), :method => :patch, :class => "btn btn-primary rotten_select" %>
       <% else %>
         Someone in your league already has this movie.
