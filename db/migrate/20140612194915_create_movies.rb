@@ -4,10 +4,10 @@ class CreateMovies < ActiveRecord::Migration
       t.string :title
       t.string :category
       t.string :description
-      t.string :rotten_id
-      t.string :critics_score
-      t.string :audience_score
-      t.string :user_id
+      t.integer :rotten_id
+      t.integer :critics_score
+      t.integer :audience_score
+      t.integer :user_id
 
       t.timestamps
     end
