@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def movie_taken?(rotten_id_i, league_id)
-    @movie = !Movie.where("rotten_id = #{rotten_id_i} AND league_id = #{league_id}").empty?
+    @movie = !Movie.where("rotten_id = #{rotten_id_i.to_i} AND league_id = #{league_id.to_i}").empty?
   end
 
   def has_memberships?
