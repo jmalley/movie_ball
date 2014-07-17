@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   resources :invites
   devise_for :users
 
-
+  get "/" => 'alpha_landing#create', as: :alpha_email
+  resources :alpha_landing
 
   get "/leagues/:league_id/movies/:id/edit" => 'movies#edit', as: :rotten_search
   patch "/leagues/:league_id/movies/:id/update" => 'movies#update', as: :update_movie_with_rt
@@ -23,7 +24,11 @@ Rails.application.routes.draw do
   resources :rotten_search
 
 
-  root "home#index"
+  authenticated do
+    root 'home#index', as: :authenticated
+  end
+  
+  root "alpha_landing#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -16,5 +16,8 @@ module ApplicationHelper
     @member = !Membership.where("user_id = #{current_user.id}").empty?
   end
 
+  def randomized_background_image
+    images = "assets/blurry_bg/#{rand(18)}.jpg"
+  end
 
 end

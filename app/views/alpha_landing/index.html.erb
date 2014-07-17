@@ -1,0 +1,16 @@
+<div id="alphaSignUp">
+  <p>
+    Hello! We will be launching in a few months! Enter your email address below if you'd like to know when you can play!
+  </p> 
+  <% unless @completed %>
+    <%# form_for @alpha_sign_up, remote: true do |f| %>
+        <%# f.email_field :email %>
+        <%# f.submit 'Submit' %>
+    <%# end %>
+    Form
+  <% else %>
+    <p>Cool we got you!</p>
+  <% end %>
+
+  <span id="photoCredit"><a href="http://inspirationfeed.com/freebies/blurry-nature-free-high-resolution-backgrounds/">Images by Igor Ovsyannykov</a></span>
+</div>

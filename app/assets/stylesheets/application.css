@@ -26,6 +26,38 @@ body{
   background: #333;
 }
 
+body#alpha_landing{
+  background: none;
+}
+
+html#alpha_landing_html{
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#alphaSignUp{
+  text-align: center;
+  width: 100%;
+  margin-top: 50px;
+  padding: 50px 0px;
+  background-color:rgba(0,0,0,0.5);
+  color: #FFF
+}
+
+#photoCredit{
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  padding: 8px
+}
+
+#photoCredit a{
+  color: #FFF; 
+  text-shadow: 2px 2px #333;
+}
+
 #mainContainer{
   background: #FFF;
   padding: 15px;
