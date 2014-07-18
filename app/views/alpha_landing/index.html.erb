@@ -3,11 +3,10 @@
     Hello! We will be launching in a few months! Enter your email address below if you'd like to know when you can play!
   </p> 
   <% unless @completed %>
-    <%# form_for @alpha_sign_up, remote: true do |f| %>
-        <%# f.email_field :email %>
-        <%# f.submit 'Submit' %>
-    <%# end %>
-    Form
+    <%= form_for @alpha_sign_up, :url => alpha_email_path, remote: true do |f| %>
+        <%= f.email_field :email %>
+        <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+    <% end %>
   <% else %>
     <p>Cool we got you!</p>
   <% end %>

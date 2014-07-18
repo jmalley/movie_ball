@@ -46,6 +46,10 @@ html#alpha_landing_html{
   color: #FFF
 }
 
+#alpha_sign_up_email{
+  margin-bottom: 0px;
+}
+
 #photoCredit{
   position: fixed;
   right: 0px;

@@ -2,7 +2,7 @@ class AlphaLandingController < ApplicationController
   layout "lander"
 
   def index
-    
+    @alpha_sign_up = AlphaSignUp.new(params[:email])
   end
 
   def create
