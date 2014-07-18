@@ -24,13 +24,11 @@ Rails.application.routes.draw do
   
   resources :rotten_search
 
-
-  # authenticated do
+  authenticated do
     root 'home#index', as: :authenticated
-  # end
-
-  # root :to => "alpha_landing#index"
-
+  end
+    get "/" => "alpha_landing#index", :as => "root"
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

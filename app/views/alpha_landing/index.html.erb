@@ -1,15 +1,15 @@
-<div id="alphaSignUp">
+  
+  <h1>MovieBall</h1><br /><br />
   <p>
     Hello! We will be launching in a few months! Enter your email address below if you'd like to know when you can play!
-  </p> 
-  <% unless @completed %>
-    <%= form_for @alpha_sign_up, :url => alpha_email_path, remote: true do |f| %>
+  </p> <br /><br />
+  <%# unless @completed %>
+    <%= form_for @alpha_sign_up, url: alpha_email_path(@alpha_sign_up) do |f| %>
         <%= f.email_field :email %>
         <%= f.submit 'Submit', :class => 'btn btn-primary' %>
     <% end %>
-  <% else %>
-    <p>Cool we got you!</p>
-  <% end %>
+  <%# else %>
+    <!-- <p>Cool we got you!</p> -->
+  <%# end %>
 
   <span id="photoCredit"><a href="http://inspirationfeed.com/freebies/blurry-nature-free-high-resolution-backgrounds/">Images by Igor Ovsyannykov</a></span>
-</div>
