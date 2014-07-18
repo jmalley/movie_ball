@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  devise_for :admins
   get 'invites/create'
 
   get 'leagues/:id/join' => 'leagues#join', as: :league_join
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
   resources :movies, :collection => { :search => :get }
   
   resources :rotten_search
+
+  resources :adminportal
 
   authenticated do
     root 'home#index', as: :authenticated

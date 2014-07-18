@@ -1,0 +1,10 @@
+<%= "<p id=\"godModeNotice\">GOD MODE ACTIVE!</p>".html_safe if current_admin.god_mode? %>
+
+<h2>Alpha SignUps</h2>
+<ul>
+  <% @alphas.each do |a| %>
+    <li>
+      <%= a.email %>
+    </li>
+  <% end %>
+</ul>
