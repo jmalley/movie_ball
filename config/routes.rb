@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   resources :invites
   devise_for :users
 
+  devise_scope :user do
+    get "/gologin" => "devise/sessions#new"
+  end
+
   # get "/" => 'alpha_landing#create', as: :alpha_email
   post "/" => 'alpha_landing#create', as: :alpha_email
   resources :alpha_landing
