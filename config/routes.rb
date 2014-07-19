@@ -31,10 +31,12 @@ Rails.application.routes.draw do
 
   resources :adminportal
 
-  authenticated do
-    root 'home#index', as: :authenticated
+  authenticated :user do
+    root :to => 'home#index', :as => "authenticated_root"
   end
-    get "/" => "alpha_landing#index", :as => "root"
+    root :to => 'alpha_landing#index'
+
+    #get "/" => "alpha_landing#index", :as => "root"
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
