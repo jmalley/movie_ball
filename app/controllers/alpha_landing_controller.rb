@@ -2,7 +2,11 @@ class AlphaLandingController < ApplicationController
   layout "lander"
 
   def index
+    if user_signed_in?
+      redirect_to :controller=> "home", :action => "index"
+    end
     @alpha_sign_up = AlphaSignUp.new
+
   end
 
   def create
