@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def randomized_background_image
-    images = "assets/blurry_bg/#{rand(17)}.jpg"
+    images = "https://s3.amazonaws.com/StaticMovieAssets/BG+Images/#{rand(17)}.jpg"
   end
 
 end
