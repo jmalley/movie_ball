@@ -1,5 +1,7 @@
 <% if is_a_member?(@league.id) %>
-Go look at your studio.
+  <% unless has_a_studio? %>
+    <%= link_to "Create a Studio", new_league_studio_path(@league) %>
+  <% end %>
 
 <%# form_for @invite , :url => invites_path do |f| %>
     <%# f.hidden_field :user_group_id, :value => @invite.user_group_id %>
@@ -57,9 +59,9 @@ Go look at your studio.
 
         <br />
           <div style="display: none">
-          <% user.movies.where("movies.title IS NOT NULL AND league_id = #{@league.id}").each do |m| %>
-              <%= m.title %><br />
-          <% end %>
+          <%# user.movies.where("movies.title IS NOT NULL AND league_id = #{@league.id}").each do |m| %>
+              <%# m.title %><br />
+          <%# end %>
           </div>
       </li>
 

@@ -19,7 +19,7 @@ before_filter :authenticate_user!
     # @invited = @league.invites.map{ |u| User.where("id = #{u.recipient_id}")}
     @invited = @league.invited_users.where("accepted is null")
     @memberships = @league.memberships.map{ |membership| membership.user }
-    @member_movies = @memberships.map{ |m| m.movies_for(@league)}
+    # @member_movies = @memberships.map{ |m| m.movies_for(@league)}
     #@member_users = User.where("id = #{@memberships.user_id}")
 
   end
@@ -42,13 +42,19 @@ before_filter :authenticate_user!
         :user_id => current_user.id,
         :league_id => params[:l]
         )
-      Studio.create!(
-        :league_id => @league.id
-        )
+     
       Invite.accept_invite(@league.id, current_user.id)
-      redirect_to @league, notice: 'You are now a member! Fill up your roster!' 
+      redirect_to @league, notice: 'You are now a member! Create your studio.' 
     end
   end
+
+  # def create_studio
+  #     @league = League.find(params[:id])
+  #     Studio.create!(
+  #       :league_id => @league.id
+  #       )
+  #     redirect_to @studio, notice: 'You now have a studio!'
+  # end
 
   # POST /leagues
   # POST /leagues.json

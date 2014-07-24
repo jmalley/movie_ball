@@ -1,6 +1,6 @@
 class Studio < ActiveRecord::Base
     validates :name, uniqueness: { scope: :league_id, message: "Another studio in this league already has that name." }
-
+    
     has_many :movies, :dependent => :destroy
 
     has_many :studio_ownerships
@@ -8,14 +8,21 @@ class Studio < ActiveRecord::Base
 
     belongs_to :league
 
-    # not currently in user
-    # def movies_for(studio, league)
-    #   studio.movies.where(league_id: league.id)
-    # end
+    def self.find_league_studio(l_id, studio_id)
+      where("id = #{studio_id} AND league_id = #{l_id}")
+    end
 
-
+    # after_create :setup_ownership
     # need to fire off when prompted by user?
     # after_create :populate_categories
+
+
+    def setup_ownership
+      # StudioOwnership.create!(
+      #   :user_id => current_user.id,
+      #   :studio_id => self.id
+      #   )
+    end
 
     # def populate_categories
     #   if studio.movies.empty?

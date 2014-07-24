@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
     @owner = !Membership.where("owner_id = #{current_user.id} AND league_id = #{league_id}").empty?
   end
 
-  def movies_for(league)
-    Movies.where(league_id: league.id)
+  def movies_for(studio)
+    Movies.where("studio_id = #{studio.id}")
   end
 
 end

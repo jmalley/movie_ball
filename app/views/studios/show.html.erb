@@ -20,7 +20,7 @@
         <td>
         <% unless movie.rotten_id %>
           <%= link_to "Add Movie",
-                      rotten_search_index_path(:category => "#{movie.category}", :id => movie.id, :league_id => @league.id), :class => 'btn btn-mini' %>
+                      rotten_search_index_path(:category => "#{movie.category}", :id => movie.id, :league_id => @league.id, :studio_id => @studio.id), :class => 'btn btn-mini' %>
         <% else %>
           Stub
         <% end %>
@@ -34,3 +34,13 @@
     <% end %>
   </tbody>
 </table>
+
+<% content_for :sidebar do %>
+
+  <% if is_a_studio_owner?(@st.id) %>
+    <%= link_to "Edit Studio", edit_league_studio_path %>
+  <% else %>
+    This isn't your studio.
+  <% end %>
+
+<% end %>

@@ -3,7 +3,7 @@ class League < ActiveRecord::Base
   has_many :users, :through => :memberships
 
   has_many :studios
-
+  
   has_one :owner
 
   belongs_to :owner, :class_name => "User", :foreign_key => :owner_id

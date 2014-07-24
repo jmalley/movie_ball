@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'invites/create'
 
   get 'leagues/:id/join' => 'leagues#join', as: :league_join
+  get 'leagues/:id/create_studio' => 'leagues#create_studio', as: :create_league_studio
   resources :leagues
 
   resources :leagues do
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:show, :edit, :update, :destroy], :collection => { :search => :get }
 
-  resources :invitesaccess
+  resources :invites
   devise_for :users
 
   devise_scope :user do
@@ -25,8 +26,8 @@ Rails.application.routes.draw do
   post "/" => 'alpha_landing#create', as: :alpha_email
   resources :alpha_landing
 
-  get "/leagues/:league_id/movies/:id/edit" => 'movies#edit', as: :rotten_search
-  patch "/leagues/:league_id/movies/:id/update" => 'movies#update', as: :update_movie_with_rt
+  get "/leagues/:league_id/studios/:studio_id/movies/:id/edit" => 'movies#edit', as: :rotten_search
+  patch "/leagues/:league_id/studios/:studio_id/movies/:id/update" => 'movies#update', as: :update_movie_with_rt
 
   #get "/movies/my_roster" => 'movies#my_roster', as: :my_roster
   
