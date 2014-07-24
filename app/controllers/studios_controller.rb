@@ -7,6 +7,7 @@ class StudiosController < ApplicationController
     # @studio_members = @studio.studio_ownerships.map{ |ownership| studio_ownership.user }
     @st = Studio.find(params[:id])
     @movies = @st.movies
+    
   end
 
   def new
@@ -23,6 +24,15 @@ class StudiosController < ApplicationController
           :user_id => current_user.id,
           :studio_id => @studio.id
           )
+          if @studio.movies.empty?
+            @studio.movies.create!(:user_id => current_user.id, :category => 'Critical Darling')
+            @studio.movies.create!(:user_id => current_user.id, :category => 'UltraSnub')
+            @studio.movies.create!(:user_id => current_user.id, :category => 'Actors Access')
+            @studio.movies.create!(:user_id => current_user.id, :category => 'Doc/Foreign/Animation')
+            @studio.movies.create!(:user_id => current_user.id, :category => 'Early Release')
+          else
+            # todo: check selected movie status
+          end
         # movies.populate_categories
         # binding.pry
         format.html { redirect_to [@league, @studio], notice: 'Studio was successfully created.' }
@@ -34,13 +44,8 @@ class StudiosController < ApplicationController
     end
   end
 
-  def first_time_setup
-    @studio = Studio.find_league_studio(@league.id, params[:id])
-    StudioOwnership.create!(
-      :user_id => current_user.id,
-      :studio_id => @studio.id
-    )
-    redirect to league_studio_path(@studio)
+  def populate_categories
+
   end
 
   private

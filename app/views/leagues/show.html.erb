@@ -1,6 +1,9 @@
 <% if is_a_member?(@league.id) %>
   <% unless has_a_studio? %>
+    <p>
+    You're a member of <%= @league.name %> but you don't have a studio yet, or any studio invites.<br />
     <%= link_to "Create a Studio", new_league_studio_path(@league) %>
+    </p>
   <% end %>
 
 <%# form_for @invite , :url => invites_path do |f| %>
@@ -15,6 +18,25 @@
   <p>You've been invited to <strong><%= @league.name %></strong>. <%= link_to "Join Up!", league_join_path(@league, :l => @league.id) %></p>
   <% end %>
 <% end #end is_a_member? %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+      <th>Members</th>
+    </tr>
+  </thead>
+<tbody>
+    <% @studios.each do |s| %>
+      <tr>
+        <td><%= link_to s.name, [@league, s] %></td>
+        <td><%# s.score %></td>
+        <td><%# s.owners %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <% content_for :sidebar do %>
   <!-- sidebar content specific to this page -->

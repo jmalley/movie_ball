@@ -13,14 +13,13 @@
 <tbody>
     <% @movies.each do |movie| %>
       <tr>
-        <td><%= movie.category %></td>
+        <td><%= movie.category %><%= movie.id %></td>
         <td><%= movie.title %></td>
         <td><%= movie.critics_score %></td>
         <td><%= movie.audience_score %></td>
         <td>
         <% unless movie.rotten_id %>
-          <%= link_to "Add Movie",
-                      rotten_search_index_path(:category => "#{movie.category}", :id => movie.id, :league_id => @league.id, :studio_id => @studio.id), :class => 'btn btn-mini' %>
+          <%= link_to "Add Movie", rotten_search_index_path(:category => "#{movie.category}", :id => movie, :league_id => @league, :studio_id => @studio), :class => 'btn btn-mini' %>
         <% else %>
           Stub
         <% end %>
@@ -36,9 +35,12 @@
 </table>
 
 <% content_for :sidebar do %>
-
+  
+  <h3><%= link_to "Back to League Home", @league %></h3>
   <% if is_a_studio_owner?(@st.id) %>
+  <p>
     <%= link_to "Edit Studio", edit_league_studio_path %>
+  </p>
   <% else %>
     This isn't your studio.
   <% end %>

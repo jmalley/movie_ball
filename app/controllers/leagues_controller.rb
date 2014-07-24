@@ -22,6 +22,8 @@ before_filter :authenticate_user!
     # @member_movies = @memberships.map{ |m| m.movies_for(@league)}
     #@member_users = User.where("id = #{@memberships.user_id}")
 
+    @studios = @league.studios
+
   end
 
   # GET /leagues/new
