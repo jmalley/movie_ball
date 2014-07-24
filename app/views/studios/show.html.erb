@@ -1,0 +1,36 @@
+<h2><%= @studio.name %></h2>
+<h3>Your studio's roster in the league: <%= @league.name %></h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Title</th>
+      <th>Critics Score</th>
+      <th>Audience Score</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+<tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.category %></td>
+        <td><%= movie.title %></td>
+        <td><%= movie.critics_score %></td>
+        <td><%= movie.audience_score %></td>
+        <td>
+        <% unless movie.rotten_id %>
+          <%= link_to "Add Movie",
+                      rotten_search_index_path(:category => "#{movie.category}", :id => movie.id, :league_id => @league.id), :class => 'btn btn-mini' %>
+        <% else %>
+          Stub
+        <% end %>
+          <%# link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      movie_path(movie),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

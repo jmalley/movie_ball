@@ -14,7 +14,6 @@ before_filter :authenticate_user!
   # GET /leagues/1.json
   def show
     @league = League.find(params[:id])
-    @movies = current_user.movies_for(@league)
     @invite = Invite.new
 
     # @invited = @league.invites.map{ |u| User.where("id = #{u.recipient_id}")}
@@ -42,6 +41,9 @@ before_filter :authenticate_user!
       Membership.create!(
         :user_id => current_user.id,
         :league_id => params[:l]
+        )
+      Studio.create!(
+        :league_id => @league.id
         )
       Invite.accept_invite(@league.id, current_user.id)
       redirect_to @league, notice: 'You are now a member! Fill up your roster!' 

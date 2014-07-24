@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718224653) do
+ActiveRecord::Schema.define(version: 20140724160216) do
 
   create_table "add_rotten_movie", force: true do |t|
     t.integer "rotten_id"
@@ -88,6 +88,24 @@ ActiveRecord::Schema.define(version: 20140718224653) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "league_id"
+    t.integer  "studio_id"
+  end
+
+  create_table "studio_ownerships", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "studios", force: true do |t|
+    t.string   "name"
+    t.string   "logo"
+    t.integer  "league_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "users", force: true do |t|
