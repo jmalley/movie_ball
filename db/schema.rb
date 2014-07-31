@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731142008) do
+ActiveRecord::Schema.define(version: 20140731152621) do
 
   create_table "add_rotten_movie", force: true do |t|
     t.integer "rotten_id"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20140731142008) do
     t.integer  "per_theater_avg"
     t.string   "roeper_score"
     t.integer  "stubbed_by"
+    t.integer  "league_id"
   end
 
   create_table "studio_ownerships", force: true do |t|

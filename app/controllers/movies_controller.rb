@@ -18,7 +18,7 @@ class MoviesController < ApplicationController
     @movie = Movie.new
     @movie.user_id = current_user
     @movie.league_id = params[:league_id]
-
+    @movie.studio_id = params[:studio_id]
 
   end
 
@@ -32,6 +32,7 @@ class MoviesController < ApplicationController
 
     @movie.user_id = current_user.id
     @movie.league_id = params[:league_id]
+    @movie.studio_id = params[:studio_id]
     @league = params[:league_id]
 
     @rotten_api_key = ENV['ROTTEN_TOMATOES_API']
@@ -51,7 +52,7 @@ class MoviesController < ApplicationController
     # Movies have to be added to existing categories via movies#edit
     respond_to do |format|
       if @movie.save
-        format.html { redirect_to @league, notice: 'Movie was successfully created.' }
+        format.html { redirect_to @studio, notice: 'Movie was successfully created.' }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new }
@@ -72,10 +73,11 @@ class MoviesController < ApplicationController
     @movie.title = params[:title]
 
     @league = League.find params[:league_id]
+    @studio = Studio.find params[:studio_id]
 
     respond_to do |format|
       if @movie.update(movie_params)
-        format.html { redirect_to @league, notice: 'Your roster was successfully updated.' }
+        format.html { redirect_to league_studio_path(@league, @studio), notice: 'Your roster was successfully updated.' }
         format.json { render :show, status: :ok, location: @movie }
       else
         format.html { render :edit }

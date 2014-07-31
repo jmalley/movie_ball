@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   get 'leagues/:id/join' => 'leagues#join', as: :league_join
   get 'leagues/:id/create_studio' => 'leagues#create_studio', as: :create_league_studio
+
+  # get 'leagues/:league_id/studios/:studio_id' => 'studios#show'
+
   resources :leagues
 
   resources :leagues do

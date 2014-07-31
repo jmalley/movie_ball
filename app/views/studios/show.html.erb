@@ -13,13 +13,13 @@
 <tbody>
     <% @movies.each do |movie| %>
       <tr>
-        <td><%= movie.category %><%= movie.id %></td>
+        <td><%= movie.category %> (<%= movie.rotten_id %>, <%= movie.id %>)</td>
         <td><%= movie.title %></td>
         <td><%= movie.critics_score %></td>
         <td><%= movie.audience_score %></td>
         <td>
         <% unless movie.rotten_id %>
-          <%= link_to "Add Movie", rotten_search_index_path(:category => "#{movie.category}", :id => movie, :league_id => @league, :studio_id => @studio), :class => 'btn btn-mini' %>
+          <%= link_to "Add Movie", rotten_search_index_path(:category => "#{movie.category}", :id => movie, :league_id => @league, :studio_id => @studio_id), :class => 'btn btn-mini' %>
         <% else %>
           Stub
         <% end %>

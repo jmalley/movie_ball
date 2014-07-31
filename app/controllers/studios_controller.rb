@@ -4,10 +4,10 @@ class StudiosController < ApplicationController
 
   def show
     @studio = Studio.find_league_studio(@league.id, params[:id])
+    @studio_id = @studio.first.id
     # @studio_members = @studio.studio_ownerships.map{ |ownership| studio_ownership.user }
     @st = Studio.find(params[:id])
     @movies = @st.movies
-    
   end
 
   def new
