@@ -8,3 +8,41 @@
     </li>
   <% end %>
 </ul>
+
+<h2>All Movies</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Studios</th>
+      <th>Rotten Score</th>
+      <th>Roeper Score</th>
+      <th>Nominations</th>
+      <th>Wins</th>
+      <th>Actor Nominations</th>
+      <th>Actor Wins</th>
+      <th>Per Theater Avg</th>
+      <th>Industry Notes</th>
+
+    </tr>
+  </thead>
+<tbody>
+
+  <% @movies.each do |m| %>
+  <tr>
+    <td>
+      <%= m.title %>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <% end %>
+</tbody>
+</table>
