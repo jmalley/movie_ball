@@ -75,6 +75,8 @@ class MoviesController < ApplicationController
     @league = League.find params[:league_id]
     @studio = Studio.find params[:studio_id]
 
+    @movie.league_id = @league.id
+
     respond_to do |format|
       if @movie.update(movie_params)
         format.html { redirect_to league_studio_path(@league, @studio), notice: 'Your roster was successfully updated.' }
