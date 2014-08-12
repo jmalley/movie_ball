@@ -12,8 +12,12 @@ module ApplicationHelper
     @owner = !StudioOwnership.where("user_id = #{current_user.id} AND studio_id = #{studio_id}").empty?
   end
 
-  def has_a_studio?
+  def has_a_studio?(leagueid)
     @user = !StudioOwnership.where("user_id = #{current_user.id}").empty?
+  end
+
+  def has_a_studio_in_this_league?(leagueid)
+     @user = !StudioOwnership.where("league_id = #{leagueid} AND user_id = #{current_user.id}").empty?
   end
 
   def movie_taken?(rotten_id_i, league_id)

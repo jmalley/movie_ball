@@ -17,12 +17,12 @@ class StudiosController < ApplicationController
 
   def create
     @studio = @league.studios.new(studio_params)
-    
     respond_to do |format|
       if @studio.save
         StudioOwnership.create!(
           :user_id => current_user.id,
-          :studio_id => @studio.id
+          :studio_id => @studio.id,
+          :league_id => @league.id
           )
           if @studio.movies.empty?
             @studio.movies.create!(:user_id => current_user.id, :category => 'Critical Darling')

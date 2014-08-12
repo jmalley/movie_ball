@@ -1,5 +1,5 @@
 <% if is_a_member?(@league.id) %>
-  <% unless has_a_studio? %>
+  <% unless has_a_studio_in_this_league?(@league.id) %>
     <p>
     You're a member of <%= @league.name %> but you don't have a studio yet, or any studio invites.<br />
     <%= link_to "Create a Studio", new_league_studio_path(@league) %>
