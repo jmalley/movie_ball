@@ -11,11 +11,17 @@ gem 'travis'
 gem 'rails', '4.1.1'
 gem 'rest-client'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', group: :development
+# gem 'sqlite3', group: :development
+
+gem 'pg', '~> 0.17.1'
 
 group :production do
   gem 'rails_12factor'
-  gem 'pg'
+  # gem 'pg'
+end
+
+group :development do
+  gem 'better_errors'
 end
 
 # Use SCSS for stylesheets

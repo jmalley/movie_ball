@@ -7,7 +7,7 @@ class Membership < ActiveRecord::Base
   after_create :make_studio
 
   def make_studio
-    league.studio.create!(:league_id => league.id)
+    # league.studio.create!(league_id: league.id)
   end
 
 
