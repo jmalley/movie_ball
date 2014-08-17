@@ -2,5 +2,6 @@
 <%= form_tag rotten_search_path(:id => @movie_id, :league_id => @league_id, :studio_id => @studio_id), method: "GET" do %>
   <%= hidden_field(:rotten_search, :category, :value => @category_url_safe) %>
   <%= text_field_tag :qauto, params[:qauto] %>
-  <%= submit_tag "Search", :name => nil %>
+  <%= button_tag "Search", :name => nil, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Searching..."} %>
+
 <% end %> 
