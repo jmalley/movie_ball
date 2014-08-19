@@ -3,10 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  # Prevent overloading of rottentomatoes
-  require 'slowweb'
-  SlowWeb.limit('api.rottentomatoes.com', 5, 1)
-
   def is_a_member?(league_id)
     @member = !Membership.where("user_id = #{current_user.id} AND league_id = #{league_id}").empty?
   end

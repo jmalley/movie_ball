@@ -1,5 +1,9 @@
 class RottenSearchController < ApplicationController
   include ERB::Util
+  
+  # Prevent overloading of rottentomatoes
+  require 'slowweb'
+  SlowWeb.limit('api.rottentomatoes.com', 5, 1)
 
   def index
     @category = params[:category]

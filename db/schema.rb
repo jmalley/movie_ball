@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812164949) do
+ActiveRecord::Schema.define(version: 20140819190431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,16 +91,20 @@ ActiveRecord::Schema.define(version: 20140812164949) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "studio_id"
+    t.integer  "league_id"
+  end
+
+  create_table "rotten_movies", force: true do |t|
     t.integer  "nominations"
     t.integer  "wins"
     t.integer  "actor_nominations"
     t.integer  "actor_wins"
-    t.date     "release_date"
+    t.integer  "release_date"
     t.text     "industry_notes"
     t.integer  "per_theater_avg"
-    t.string   "roeper_score"
-    t.integer  "stubbed_by"
-    t.integer  "league_id"
+    t.integer  "roeper_score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "studio_ownerships", force: true do |t|

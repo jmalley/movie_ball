@@ -6,7 +6,7 @@ gem "less-rails"
 gem "twitter-bootstrap-rails"
 gem 'unicorn'
 gem 'travis'
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.5'
 gem 'rest-client'
 gem 'pg', '~> 0.17.1'
 gem 'devise'
